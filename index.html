@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر ريم | REEM Store</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (الأيقونات) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== المتغيرات وإعادة الضبط ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-pink: #f9e5e8;
+            --soft-beige: #faf7f2;
+            --pure-white: #ffffff;
+            --golden: #d4af37;
+            --dark-text: #4a4a4a;
+            --light-text: #7a7a7a;
+            --border-light: #f0e4e4;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--soft-beige);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* تنسيقات خاصة للغة الإنجليزية */
+        body[dir="ltr"] {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== الأزرار ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--golden);
+            color: var(--pure-white);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #c1a030;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--golden);
+            color: var(--golden);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--golden);
+            color: var(--pure-white);
+        }
+
+        /* ===== الهيدر ===== */
+        .header {
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--golden);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu ul li a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--golden);
+            transition: var(--transition);
+        }
+
+        .nav-menu ul li a:hover::after,
+        .nav-menu ul li a.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--border-light);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--soft-beige);
+        }
+
+        .lang-btn:hover {
+            background-color: var(--golden);
+            color: white;
+            border-color: var(--golden);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--golden);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        body[dir="ltr"] .cart-count {
+            right: auto;
+            left: -8px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* ===== هيرو سيكشن ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--soft-beige) 100%);
+            padding: 60px 0;
+            overflow: hidden;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #3a3a3a;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        /* ===== أقسام عامة ===== */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            position: relative;
+            color: #3a3a3a;
+        }
+
+        .section-title span {
+            color: var(--golden);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--golden);
+        }
+
+        /* ===== الفئات ===== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: var(--pure-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .category-card h3 {
+            padding: 20px;
+            font-size: 1.3rem;
+            color: var(--dark-text);
+        }
+
+        /* ===== بطاقة المنتج ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--pure-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .product-actions .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--golden);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* ===== مميزات ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 30px;
+            background-color: var(--pure-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--golden);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: var(--light-text);
+        }
+
+        /* ===== فوتر ===== */
+        .footer {
+            background-color: #2c2c2c;
+            color: #f0f0f0;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--golden);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--golden);
+            padding-right: 5px;
+        }
+
+        body[dir="ltr"] .footer-col ul li a:hover {
+            padding-right: 0;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #3a3a3a;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--golden);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* ===== صفحة المتجر (فلتر) ===== */
+        .shop-header {
+            background-color: var(--pure-white);
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 8px 25px;
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--golden);
+            color: white;
+            border-color: var(--golden);
+        }
+
+        /* ===== صفحة المنتج ===== */
+        .product-page {
+            padding: 60px 0;
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background-color: var(--pure-white);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-image {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            opacity: 1;
+            border: 2px solid var(--golden);
+        }
+
+        .product-info-detailed h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .product-info-detailed .price {
+            font-size: 1.8rem;
+            color: var(--golden);
+            margin-bottom: 20px;
+        }
+
+        .product-info-detailed .description {
+            line-height: 1.8;
+            color: var(--light-text);
+            margin-bottom: 30px;
+        }
+
+        .size-selector {
+            margin-bottom: 30px;
+        }
+
+        .size-selector label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 10px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .size-option:hover,
+        .size-option.selected {
+            background-color: var(--golden);
+            color: white;
+            border-color: var(--golden);
+        }
+
+        /* ===== لوحة التحكم ===== */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: #2c2c2c;
+            color: white;
+            padding: 30px 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 30px;
+            border-bottom: 1px solid #444;
+        }
+
+        .sidebar-header h2 {
+            color: var(--golden);
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li {
+            padding: 12px 25px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .sidebar-menu li:hover,
+        .sidebar-menu li.active {
+            background-color: var(--golden);
+        }
+
+        .sidebar-menu li i {
+            margin-left: 15px;
+            width: 20px;
+        }
+
+        body[dir="ltr"] .sidebar-menu li i {
+            margin-left: 0;
+            margin-right: 15px;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--pure-white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--golden);
+        }
+
+        .stat-info h3 {
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .recent-table {
+            background-color: var(--pure-white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .recent-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recent-table th,
+        .recent-table td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body[dir="ltr"] .recent-table th,
+        body[dir="ltr"] .recent-table td {
+            text-align: left;
+        }
+
+        .recent-table th {
+            font-weight: 600;
+            color: var(--light-text);
+        }
+
+        /* ===== ريسponsive ===== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background-color: var(--pure-white);
+                width: 80%;
+                height: calc(100vh - 80px);
+                padding: 40px;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            body[dir="ltr"] .nav-menu {
+                right: auto;
+                left: -100%;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            body[dir="ltr"] .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <!-- ===== هيدر ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>REEM</h1>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <ul id="navList">
+                    <!-- سيتم ملء القائمة بواسطة الجافاسكربت حسب اللغة -->
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="lang-btn" id="langToggle">EN</button>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== هيرو سيكشن ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content" id="heroContent">
+                <h2>أناقة تليق بكِ</h2>
+                <p>اكتشفي أحدث الفساتين والجلابيات والشنط والجزم وبوكسات الهدايا والمكياج بتصاميم أنيقة تناسب كل المناسبات.</p>
+                <a href="#" class="btn btn-primary" id="shopNowBtn">تسوقي الآن</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-image.jpg" alt="Elegant dress">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== الفئات الرئيسية ===== -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="categoriesTitle"><span>فئات</span> مميزة</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- ستتم إضافة الفئات عبر JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== منتجات مميزة ===== -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="featuredTitle"><span>منتجات</span> مميزة</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- ستتم إضافة المنتجات عبر JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== لماذا متجر ريم ===== -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="featuresTitle">لماذا <span>متجر ريم</span></h2>
+            <div class="features-grid" id="featuresGrid">
+                <div class="feature-item">
+                    <i class="fas fa-tshirt"></i>
+                    <h3 data-ar="تصاميم أنيقة" data-en="Elegant Designs">تصاميم أنيقة</h3>
+                    <p data-ar="أحدث الصيحات في عالم الموضة" data-en="Latest fashion trends">أحدث الصيحات في عالم الموضة</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-gem"></i>
+                    <h3 data-ar="جودة عالية" data-en="High Quality">جودة عالية</h3>
+                    <p data-ar="أفضل الخامات والتفصيل" data-en="Premium materials">أفضل الخامات والتفصيل</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-truck"></i>
+                    <h3 data-ar="توصيل سريع" data-en="Fast Delivery">توصيل سريع</h3>
+                    <p data-ar="شحن سريع لجميع المدن" data-en="Quick shipping">شحن سريع لجميع المدن</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-gift"></i>
+                    <h3 data-ar="تغليف هدايا فاخر" data-en="Luxury Gift Wrap">تغليف هدايا فاخر</h3>
+                    <p data-ar="تغليف أنيق لمناسباتك" data-en="Elegant packaging">تغليف أنيق لمناسباتك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة المتجر (مخفية افتراضياً) ===== -->
+    <section class="section" id="shopPage" style="display: none;">
+        <div class="shop-header">
+            <div class="container">
+                <h2 class="section-title" id="shopTitle"><span>تسوقي</span> من متجرنا</h2>
+                <div class="filters" id="filterButtons">
+                    <!-- فلاتر الفئات -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="products-grid" id="allProductsGrid">
+                <!-- جميع المنتجات -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة المنتج (مخفية افتراضياً) ===== -->
+    <section class="product-page" id="productPage" style="display: none;">
+        <div class="container">
+            <div class="product-details" id="productDetails">
+                <!-- سيتم ملء تفاصيل المنتج عبر JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة من نحن (مخفية افتراضياً) ===== -->
+    <section class="section" id="aboutPage" style="display: none;">
+        <div class="container">
+            <h2 class="section-title" id="aboutTitle"><span>من</span> نحن</h2>
+            <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: center; line-height: 2; font-size: 1.2rem;">
+                <p id="aboutTextAr" style="margin-bottom: 30px;">متجر ريم هو متجر متخصص في تقديم منتجات نسائية أنيقة تجمع بين الجودة والأناقة لتناسب جميع المناسبات.</p>
+                <p id="aboutTextEn" style="display: none; margin-bottom: 30px;">Reem Store is a boutique that offers elegant women's products designed with style and quality for every occasion.</p>
+                <img src="images/about-image.jpg" alt="About us" style="border-radius: 20px; max-width: 100%;">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة تواصل معنا (مخفية افتراضياً) ===== -->
+    <section class="section" id="contactPage" style="display: none;">
+        <div class="container">
+            <h2 class="section-title" id="contactTitle"><span>تواصل</span> معنا</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+                <div>
+                    <form id="contactForm">
+                        <div style="margin-bottom: 20px;">
+                            <input type="text" id="name" placeholder="الاسم" style="width: 100%; padding: 15px; border: 1px solid var(--border-light); border-radius: 10px; font-family: 'Cairo', sans-serif;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <input type="email" id="email" placeholder="البريد الإلكتروني" style="width: 100%; padding: 15px; border: 1px solid var(--border-light); border-radius: 10px; font-family: 'Cairo', sans-serif;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <textarea id="message" placeholder="الرسالة" rows="5" style="width: 100%; padding: 15px; border: 1px solid var(--border-light); border-radius: 10px; font-family: 'Cairo', sans-serif;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال</button>
+                    </form>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 30px; justify-content: center;">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--golden);"></i>
+                        <span>info@reemstore.com</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fab fa-instagram" style="font-size: 2rem; color: var(--golden);"></i>
+                        <span>@reemstore</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fab fa-whatsapp" style="font-size: 2rem; color: var(--golden);"></i>
+                        <span>+966 50 123 4567</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== لوحة التحكم (مخفية افتراضياً) ===== -->
+    <section class="dashboard" id="dashboardPage" style="display: none;">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Reem Dashboard</h2>
+            </div>
+            <ul class="sidebar-menu" id="sidebarMenu">
+                <li class="active"><i class="fas fa-home"></i> <span data-ar="الرئيسية" data-en="Dashboard">الرئيسية</span></li>
+                <li><i class="fas fa-box"></i> <span data-ar="إدارة المنتجات" data-en="Manage Products">إدارة المنتجات</span></li>
+                <li><i class="fas fa-shopping-cart"></i> <span data-ar="إدارة الطلبات" data-en="Orders">إدارة الطلبات</span></li>
+                <li><i class="fas fa-users"></i> <span data-ar="العملاء" data-en="Customers">العملاء</span></li>
+                <li><i class="fas fa-tags"></i> <span data-ar="الفئات" data-en="Categories">الفئات</span></li>
+                <li><i class="fas fa-chart-line"></i> <span data-ar="الإحصائيات" data-en="Analytics">الإحصائيات</span></li>
+                <li><i class="fas fa-cog"></i> <span data-ar="الإعدادات" data-en="Settings">الإعدادات</span></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-box"></i></div>
+                    <div class="stat-info">
+                        <h3 data-ar="إجمالي المنتجات" data-en="Total Products">إجمالي المنتجات</h3>
+                        <p>156</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="stat-info">
+                        <h3 data-ar="الطلبات الجديدة" data-en="New Orders">الطلبات الجديدة</h3>
+                        <p>24</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3 data-ar="العملاء" data-en="Customers">العملاء</h3>
+                        <p>412</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="stat-info">
+                        <h3 data-ar="المبيعات اليومية" data-en="Daily Sales">المبيعات اليومية</h3>
+                        <p>$3,280</p>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-table">
+                <h3 style="margin-bottom: 20px;" data-ar="أحدث الطلبات" data-en="Recent Orders">أحدث الطلبات</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-ar="رقم الطلب" data-en="Order ID">رقم الطلب</th>
+                            <th data-ar="العميل" data-en="Customer">العميل</th>
+                            <th data-ar="التاريخ" data-en="Date">التاريخ</th>
+                            <th data-ar="الحالة" data-en="Status">الحالة</th>
+                            <th data-ar="الإجمالي" data-en="Total">الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#RE1001</td>
+                            <td>سارة أحمد</td>
+                            <td>2024-01-15</td>
+                            <td><span style="color: var(--golden);">مكتمل</span></td>
+                            <td>$250</td>
+                        </tr>
+                        <tr>
+                            <td>#RE1002</td>
+                            <td>نورا خالد</td>
+                            <td>2024-01-16</td>
+                            <td><span style="color: #4caf50;">قيد التنفيذ</span></td>
+                            <td>$180</td>
+                        </tr>
+                        <tr>
+                            <td>#RE1003</td>
+                            <td>هند محمد</td>
+                            <td>2024-01-17</td>
+                            <td><span style="color: var(--golden);">مكتمل</span></td>
+                            <td>$420</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== فوتر ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>REEM</h4>
+                    <p data-ar="أناقة تليق بكِ" data-en="Elegance made for you">أناقة تليق بكِ</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h4>
+                    <ul id="footerLinks">
+                        <!-- ستتم إضافة الروابط عبر JS -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <ul>
+                        <li>info@reemstore.com</li>
+                        <li><i class="fab fa-instagram"></i> @reemstore</li>
+                        <li><i class="fab fa-whatsapp"></i> +966 50 123 4567</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-ar="تابعينا" data-en="Follow Us">تابعينا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright" id="copyright">
+                © 2026 متجر ريم. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== بيانات المنتجات مع مسارات محلية =====
+        const products = [
+            { id: 1, nameAr: 'فستان بناتي وردي', nameEn: 'Pink Girls Dress', price: 189, category: 'girls', image: 'images/girls-dress-1.jpg', descAr: 'فستان بناتي أنيق بتصميم عصري', descEn: 'Elegant modern girls dress' },
+            { id: 2, nameAr: 'فستان نسائي طويل', nameEn: 'Long Women Dress', price: 299, category: 'women', image: 'images/women-dress-1.jpg', descAr: 'فستان سهرة طويل بقصّة مميزة', descEn: 'Elegant long evening dress' },
+            { id: 3, nameAr: 'جلابية مطرزة', nameEn: 'Embroidered Jalabiya', price: 249, category: 'jalabiyas', image: 'images/jalabiya-1.jpg', descAr: 'جلابية بتطريز فاخر', descEn: 'Luxury embroidered jalabiya' },
+            { id: 4, nameAr: 'بوكس هدايا فاخر', nameEn: 'Luxury Gift Box', price: 149, category: 'gifts', image: 'images/gift-box-1.jpg', descAr: 'بوكس هدايا يحتوي على منتجات عناية', descEn: 'Gift box with beauty products' },
+            { id: 5, nameAr: 'روب نسائي قصير', nameEn: 'Short Women Dress', price: 199, category: 'women', image: 'images/women-dress-2.jpg', descAr: 'فستان قصير للخروجات النهارية', descEn: 'Short dress for daytime' },
+            { id: 6, nameAr: 'فستان بناتي أحمر', nameEn: 'Red Girls Dress', price: 159, category: 'girls', image: 'images/girls-dress-2.jpg', descAr: 'فستان أحمر مميز للحفلات', descEn: 'Special red party dress' },
+            { id: 7, nameAr: 'جلابية ناعمة', nameEn: 'Soft Jalabiya', price: 219, category: 'jalabiyas', image: 'images/jalabiya-2.jpg', descAr: 'جلابية من قماش ناعم ومريح', descEn: 'Comfortable soft fabric jalabiya' },
+            { id: 8, nameAr: 'بوكس عطور', nameEn: 'Perfume Gift Box', price: 179, category: 'gifts', image: 'images/gift-box-2.jpg', descAr: 'بوكس هدايا من العطور الفاخرة', descEn: 'Luxury perfumes gift set' },
+            { id: 9, nameAr: 'بلاشر وردي', nameEn: 'Pink Blush', price: 89, category: 'makeup', image: 'images/makeup-1.jpg', descAr: 'بلاشر وردي طبيعي', descEn: 'Natural pink blush' },
+            { id: 10, nameAr: 'روج سائل', nameEn: 'Liquid Lipstick', price: 69, category: 'makeup', image: 'images/makeup-2.jpg', descAr: 'روج سائل مطفي يدوم طويلاً', descEn: 'Long-lasting matte liquid lipstick' },
+            // ===== منتجات جديدة: شنط وجزم =====
+            { id: 11, nameAr: 'حقيبة يد فاخرة', nameEn: 'Luxury Handbag', price: 349, category: 'bags', image: 'images/bag-1.jpg', descAr: 'حقيبة يد جلدية فاخرة بتصميم عصري', descEn: 'Luxury leather handbag with modern design' },
+            { id: 12, nameAr: 'حذاء كعب عالي', nameEn: 'High Heels', price: 279, category: 'shoes', image: 'images/shoes-1.jpg', descAr: 'حذاء بكعب عالي مناسب للسهرات', descEn: 'High heels perfect for evening events' },
+            { id: 13, nameAr: 'شنطة ظهر أنيقة', nameEn: 'Elegant Backpack', price: 199, category: 'bags', image: 'images/bag-2.jpg', descAr: 'شنطة ظهر جلدية أنيقة للخروجات اليومية', descEn: 'Elegant leather backpack for daily outings' },
+            { id: 14, nameAr: 'صندل فضي', nameEn: 'Silver Sandals', price: 159, category: 'shoes', image: 'images/shoes-2.jpg', descAr: 'صندل فضي أنيق بإبزيم', descEn: 'Elegant silver sandals with buckle' },
+            { id: 15, nameAr: 'حقيبة كلاتش', nameEn: 'Clutch Bag', price: 129, category: 'bags', image: 'images/bag-3.jpg', descAr: 'حقيبة كلاتش صغيرة للحفلات والمناسبات', descEn: 'Small clutch bag for parties and events' },
+            { id: 16, nameAr: 'حذاء رياضي أنيق', nameEn: 'Elegant Sneakers', price: 219, category: 'shoes', image: 'images/shoes-3.jpg', descAr: 'حذاء رياضي أنيق للخروجات الكاجوال', descEn: 'Elegant sneakers for casual outings' }
+        ];
+
+        // ===== متغيرات الحالة =====
+        let currentLang = 'ar';
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentPage = 'home';
+        let currentFilter = 'all';
+
+        // ===== عناصر DOM =====
+        const body = document.body;
+        const navList = document.getElementById('navList');
+        const footerLinks = document.getElementById('footerLinks');
+        const langToggle = document.getElementById('langToggle');
+        const cartCountSpan = document.getElementById('cartCount');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        // الصفحات
+        const sections = {
+            home: [document.querySelector('.hero'), document.querySelector('.hero + section'), document.querySelector('.section:nth-of-type(2)'), document.querySelector('.section:nth-of-type(3)')],
+            shop: document.getElementById('shopPage'),
+            product: document.getElementById('productPage'),
+            about: document.getElementById('aboutPage'),
+            contact: document.getElementById('contactPage'),
+            dashboard: document.getElementById('dashboardPage')
+        };
+
+        // ===== تحديث عداد السلة =====
+        function updateCartCount() {
+            cartCountSpan.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        // ===== إضافة للسلة =====
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(currentLang === 'ar' ? 'تمت الإضافة إلى السلة' : 'Added to cart');
+        }
+
+        // ===== إنشاء بطاقة منتج =====
+        function createProductCard(product, showActions = true) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${currentLang === 'ar' ? product.nameAr : product.nameEn}">
+                    ${showActions ? `
+                    <div class="product-actions">
+                        <button class="btn btn-outline view-details" data-id="${product.id}">${currentLang === 'ar' ? 'عرض التفاصيل' : 'View Details'}</button>
+                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">${currentLang === 'ar' ? 'إضافة للسلة' : 'Add to Cart'}</button>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="product-info">
+                    <h3>${currentLang === 'ar' ? product.nameAr : product.nameEn}</h3>
+                    <div class="product-price">$${product.price}</div>
+                </div>
+            `;
+
+            card.querySelector('.view-details')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showProductPage(product.id);
+            });
+
+            card.querySelector('.add-to-cart')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                addToCart(product.id);
+            });
+
+            return card;
+        }
+
+        // ===== عرض صفحة المنتج =====
+        function showProductPage(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentPage = 'product';
+            hideAllSections();
+            sections.product.style.display = 'block';
+
+            const container = document.getElementById('productDetails');
+            container.innerHTML = `
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="${product.image}" alt="${currentLang === 'ar' ? product.nameAr : product.nameEn}" id="mainProductImage">
+                    </div>
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active"><img src="${product.image}" alt="thumbnail"></div>
+                        <div class="thumbnail"><img src="images/product-thumbnail-1.jpg" alt="thumbnail"></div>
+                        <div class="thumbnail"><img src="images/product-thumbnail-2.jpg" alt="thumbnail"></div>
+                    </div>
+                </div>
+                <div class="product-info-detailed">
+                    <h2>${currentLang === 'ar' ? product.nameAr : product.nameEn}</h2>
+                    <div class="price">$${product.price}</div>
+                    <p class="description">${currentLang === 'ar' ? product.descAr : product.descEn}</p>
+                    ${product.category === 'bags' || product.category === 'shoes' ? `
+                    <div class="size-selector">
+                        <label>${currentLang === 'ar' ? 'اختاري المقاس' : 'Select Size'}</label>
+                        <div class="size-options">
+                            <span class="size-option">36</span>
+                            <span class="size-option">37</span>
+                            <span class="size-option">38</span>
+                            <span class="size-option">39</span>
+                            <span class="size-option">40</span>
+                        </div>
+                    </div>
+                    ` : product.category === 'girls' || product.category === 'women' || product.category === 'jalabiyas' ? `
+                    <div class="size-selector">
+                        <label>${currentLang === 'ar' ? 'اختاري المقاس' : 'Select Size'}</label>
+                        <div class="size-options">
+                            <span class="size-option">XS</span>
+                            <span class="size-option">S</span>
+                            <span class="size-option">M</span>
+                            <span class="size-option">L</span>
+                            <span class="size-option">XL</span>
+                        </div>
+                    </div>
+                    ` : ''}
+                    <button class="btn btn-primary add-to-cart-page" style="width: 100%;">${currentLang === 'ar' ? 'إضافة للسلة' : 'Add to Cart'}</button>
+                </div>
+            `;
+
+            container.querySelector('.add-to-cart-page').addEventListener('click', () => addToCart(product.id));
+            
+            // تفعيل اختيار المقاس
+            container.querySelectorAll('.size-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    container.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // تغيير الصورة الرئيسية
+            container.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                thumb.addEventListener('click', function() {
+                    container.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('mainProductImage').src = this.querySelector('img').src;
+                });
+            });
+        }
+
+        // ===== عرض المنتجات في المتجر =====
+        function renderShopProducts(filter = 'all') {
+            const grid = document.getElementById('allProductsGrid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach(product => {
+                grid.appendChild(createProductCard(product, true));
+            });
+        }
+
+        // ===== إخفاء جميع الأقسام =====
+        function hideAllSections() {
+            document.querySelectorAll('.hero, .hero + section, .section, .product-page, #shopPage, #aboutPage, #contactPage, #dashboardPage').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        // ===== عرض الصفحة الرئيسية =====
+        function showHomePage() {
+            currentPage = 'home';
+            hideAllSections();
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.hero + section').style.display = 'block';
+            document.querySelector('.section:nth-of-type(2)').style.display = 'block';
+            document.querySelector('.section:nth-of-type(3)').style.display = 'block';
+        }
+
+        // ===== تبديل اللغة =====
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            body.lang = currentLang;
+            langToggle.textContent = currentLang === 'ar' ? 'EN' : 'AR';
+            
+            // تحديث كل النصوص
+            updateTexts();
+            
+            // إعادة عرض الصفحة الحالية
+            if (currentPage === 'home') showHomePage();
+            else if (currentPage === 'shop') {
+                sections.shop.style.display = 'block';
+                renderShopProducts(currentFilter);
+            }
+            else if (currentPage === 'about') {
+                sections.about.style.display = 'block';
+                document.getElementById('aboutTextAr').style.display = currentLang === 'ar' ? 'block' : 'none';
+                document.getElementById('aboutTextEn').style.display = currentLang === 'en' ? 'block' : 'none';
+            }
+            else if (currentPage === 'product') {
+                // إعادة تحميل المنتج الحالي (تحتاج لتحسين)
+            }
+        }
+
+        // ===== تحديث النصوص حسب اللغة =====
+        function updateTexts() {
+            // قائمة التنقل
+            const navItems = [
+                { ar: 'الرئيسية', en: 'Home' },
+                { ar: 'المتجر', en: 'Shop' },
+                { ar: 'الفئات', en: 'Categories' },
+                { ar: 'من نحن', en: 'About' },
+                { ar: 'تواصل معنا', en: 'Contact' }
+            ];
+            
+            navList.innerHTML = navItems.map((item, index) => 
+                `<li><a href="#" data-page="${['home','shop','categories','about','contact'][index]}">${currentLang === 'ar' ? item.ar : item.en}</a></li>`
+            ).join('');
+
+            // روابط الفوتر
+            footerLinks.innerHTML = navItems.map((item, index) => 
+                `<li><a href="#" data-page="${['home','shop','categories','about','contact'][index]}">${currentLang === 'ar' ? item.ar : item.en}</a></li>`
+            ).join('');
+
+            // عناوين الأقسام
+            document.getElementById('categoriesTitle').innerHTML = currentLang === 'ar' ? '<span>فئات</span> مميزة' : '<span>Popular</span> Categories';
+            document.getElementById('featuredTitle').innerHTML = currentLang === 'ar' ? '<span>منتجات</span> مميزة' : '<span>Featured</span> Products';
+            document.getElementById('featuresTitle').innerHTML = currentLang === 'ar' ? 'لماذا <span>متجر ريم</span>' : 'Why <span>Reem Store</span>';
+            
+            // هيرو
+            document.querySelector('#heroContent h2').textContent = currentLang === 'ar' ? 'أناقة تليق بكِ' : 'Elegance Made for You';
+            document.querySelector('#heroContent p').textContent = currentLang === 'ar' ? 'اكتشفي أحدث الفساتين والجلابيات والشنط والجزم وبوكسات الهدايا والمكياج بتصاميم أنيقة تناسب كل المناسبات.' : 'Discover elegant dresses, jalabiyas, bags, shoes, makeup, and beautiful gift boxes designed for every occasion.';
+            document.getElementById('shopNowBtn').textContent = currentLang === 'ar' ? 'تسوقي الآن' : 'Shop Now';
+
+            // مميزات
+            document.querySelectorAll('.feature-item h3').forEach(el => {
+                el.textContent = currentLang === 'ar' ? el.dataset.ar : el.dataset.en;
+            });
+            document.querySelectorAll('.feature-item p').forEach(el => {
+                el.textContent = currentLang === 'ar' ? el.dataset.ar : el.dataset.en;
+            });
+
+            // الفئات
+            renderCategories();
+
+            // المنتجات المميزة
+            renderFeaturedProducts();
+
+            // الفلاتر
+            renderFilters();
+
+            // صفحة من نحن
+            document.getElementById('aboutTitle').innerHTML = currentLang === 'ar' ? '<span>من</span> نحن' : '<span>About</span> Us';
+            
+            // صفحة تواصل معنا
+            document.getElementById('contactTitle').innerHTML = currentLang === 'ar' ? '<span>تواصل</span> معنا' : '<span>Contact</span> Us';
+
+            // لوحة التحكم
+            document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+                el.textContent = currentLang === 'ar' ? el.dataset.ar : el.dataset.en;
+            });
+
+            // كوبيرايت
+            document.getElementById('copyright').textContent = currentLang === 'ar' ? '© 2026 متجر ريم. جميع الحقوق محفوظة.' : '© 2026 Reem Store. All rights reserved.';
+        }
+
+        // ===== عرض الفئات (باستخدام مسارات محلية) =====
+        function renderCategories() {
+            const categories = [
+                { ar: 'فساتين بناتي', en: 'Girls Dresses', img: 'images/category-girls.jpg' },
+                { ar: 'فساتين نسائية', en: 'Women Dresses', img: 'images/category-women.jpg' },
+                { ar: 'جلابيات', en: 'Jalabiyas', img: 'images/category-jalabiyas.jpg' },
+                { ar: 'شنط وجزم', en: 'Bags & Shoes', img: 'images/category-bags-shoes.jpg' },
+                { ar: 'بوكسات هدايا', en: 'Gift Boxes', img: 'images/category-gifts.jpg' },
+                { ar: 'مكياج', en: 'Makeup', img: 'images/category-makeup.jpg' }
+            ];
+
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(cat => `
+                <div class="category-card">
+                    <img src="${cat.img}" alt="${currentLang === 'ar' ? cat.ar : cat.en}">
+                    <h3>${currentLang === 'ar' ? cat.ar : cat.en}</h3>
+                </div>
+            `).join('');
+        }
+
+        // ===== عرض المنتجات المميزة =====
+        function renderFeaturedProducts() {
+            // اختيار منتجات مميزة من جميع الفئات
+            const featured = products.filter(p => [1, 2, 3, 11, 12, 4].includes(p.id));
+            const grid = document.getElementById('featuredProducts');
+            grid.innerHTML = '';
+            featured.forEach(product => {
+                grid.appendChild(createProductCard(product, false));
+            });
+        }
+
+        // ===== عرض أزرار الفلتر (محدث مع إضافة الشنط والجزم) =====
+        function renderFilters() {
+            const filters = [
+                { id: 'all', ar: 'الكل', en: 'All' },
+                { id: 'girls', ar: 'فساتين بناتي', en: 'Girls Dresses' },
+                { id: 'women', ar: 'فساتين نسائية', en: 'Women Dresses' },
+                { id: 'jalabiyas', ar: 'جلابيات', en: 'Jalabiyas' },
+                { id: 'bags', ar: 'شنط', en: 'Bags' },
+                { id: 'shoes', ar: 'جزم', en: 'Shoes' },
+                { id: 'gifts', ar: 'بوكسات هدايا', en: 'Gift Boxes' },
+                { id: 'makeup', ar: 'مكياج', en: 'Makeup' }
+            ];
+
+            const filterContainer = document.getElementById('filterButtons');
+            filterContainer.innerHTML = filters.map(f => 
+                `<button class="filter-btn ${currentFilter === f.id ? 'active' : ''}" data-filter="${f.id}">${currentLang === 'ar' ? f.ar : f.en}</button>`
+            ).join('');
+
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentFilter = this.dataset.filter;
+                    renderFilters();
+                    renderShopProducts(currentFilter);
+                });
+            });
+        }
+
+        // ===== التنقل بين الصفحات =====
+        function setupNavigation() {
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a[data-page]');
+                if (!link) return;
+                e.preventDefault();
+
+                const page = link.dataset.page;
+                
+                if (page === 'home') {
+                    showHomePage();
+                } else if (page === 'shop') {
+                    currentPage = 'shop';
+                    hideAllSections();
+                    sections.shop.style.display = 'block';
+                    renderShopProducts(currentFilter);
+                } else if (page === 'about') {
+                    currentPage = 'about';
+                    hideAllSections();
+                    sections.about.style.display = 'block';
+                } else if (page === 'contact') {
+                    currentPage = 'contact';
+                    hideAllSections();
+                    sections.contact.style.display = 'block';
+                } else if (page === 'categories') {
+                    // التمرير للفئات في الصفحة الرئيسية
+                    showHomePage();
+                    document.getElementById('categoriesTitle').scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // إغلاق القائمة على الجوال
+                navMenu.classList.remove('active');
+            });
+        }
+
+        // ===== التهيئة =====
+        function init() {
+            updateCartCount();
+            updateTexts();
+            showHomePage();
+            setupNavigation();
+
+            // زر تبديل اللغة
+            langToggle.addEventListener('click', toggleLanguage);
+
+            // قائمة الجوال
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // رابط لوحة التحكم (مخفي للعرض)
+            console.log('Dashboard available at /dashboard (not linked in UI)');
+
+            // نموذج التواصل
+            document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert(currentLang === 'ar' ? 'تم إرسال رسالتك بنجاح' : 'Your message has been sent');
+            });
+        }
+
+        // تشغيل التهيئة بعد تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
